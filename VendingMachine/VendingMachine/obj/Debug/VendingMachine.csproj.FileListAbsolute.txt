@@ -1,9 +1,0 @@
-C:\Users\payam\Documents\Visual Studio 2012\Projects\VendingMachine\VendingMachine\bin\Debug\VendingMachine.exe.config
-C:\Users\payam\Documents\Visual Studio 2012\Projects\VendingMachine\VendingMachine\bin\Debug\VendingMachine.exe
-C:\Users\payam\Documents\Visual Studio 2012\Projects\VendingMachine\VendingMachine\bin\Debug\VendingMachine.pdb
-C:\Users\payam\Documents\Visual Studio 2012\Projects\VendingMachine\VendingMachine\obj\Debug\VendingMachine.csprojResolveAssemblyReference.cache
-C:\Users\payam\Documents\Visual Studio 2012\Projects\VendingMachine\VendingMachine\obj\Debug\VendingMachine.exe
-C:\Users\payam\Documents\Visual Studio 2012\Projects\VendingMachine\VendingMachine\obj\Debug\VendingMachine.pdb
-C:\Users\payam\Documents\GitHub\Simple-Projects\VendingMachine\VendingMachine\bin\Debug\VendingMachine.exe.config
-C:\Users\payam\Documents\GitHub\Simple-Projects\VendingMachine\VendingMachine\obj\Debug\VendingMachine.exe
-C:\Users\payam\Documents\GitHub\Simple-Projects\VendingMachine\VendingMachine\obj\Debug\VendingMachine.pdb
