@@ -17,7 +17,6 @@ namespace VendingMachine
             while (true)
             {
 
-                
                 Console.WriteLine("Enter the size of coffee s=Small, m=Medium, l= Large");
                 var coffeeSize = Console.ReadLine();
                 if (!string.IsNullOrEmpty(coffeeSize))
@@ -25,113 +24,46 @@ namespace VendingMachine
                     switch (coffeeSize.ToLower())
                     {
                         case "s":
-                            order.AddOrder("smallcoffee");
+                            order.AddOrder(new Coffee(Coffee.Size.Small));
                             break;
                         case "m":
-                            order.AddOrder("mediumcoffee");
+                            order.AddOrder(new Coffee(Coffee.Size.Medium));
                             break;
                         case "l":
-                            order.AddOrder("largecoffee");
+                            order.AddOrder(new Coffee(Coffee.Size.Large));
                             break;
                     }
                 }
-                int sugarCounter = 0;
-                string sugarPack = null;
-                while (sugarCounter < 3 && sugarPack != "0")
-                {
-                    Console.WriteLine("Would you like sugar? 0 = No, 1 adds one pack of sugar, Max 3");
-                    sugarPack = Console.ReadLine();
-                    if (sugarPack == "0")
-                        break;
-                    if (sugarPack != "1")
-                    {
-                        Console.WriteLine("Will add only one sugar pack at a time");
-                        sugarPack = "1";
-                    }
-                    int sugar;
-                    int.TryParse(sugarPack, out sugar);
-                    if (sugar > 3 || sugarCounter > 3)
-                    {
-                        sugar = 3;
-                        Console.WriteLine("Maximum allowed sugar is 3 packs, sorry!");
-                    }
-                    sugarCounter += sugar;
+               
 
-                    order.AddOrder("sugar");
-                }
+                
+                order.OrderAddOn(Addon.AddOnNames.Sugar);
 
+                order.OrderAddOn(Addon.AddOnNames.Cream);
 
-
-                int creamCounter = 0;
-                string creamPack = null;
-                while (creamCounter < 3 && creamPack != "0")
-                {
-                    Console.WriteLine("Would you like cream? 0 = No, 1 adds one pack of cream at a time, Max 3");
-                    creamPack = Console.ReadLine();
-                    if (creamPack == "0")
-                        break;
-                    if (creamPack != "1")
-                    {
-                        Console.WriteLine("Will add only one cream pack at a time");
-                        creamPack = "1";
-                    }
-                    int cream;
-                    int.TryParse(creamPack, out cream);
-                    if (cream > 3)
-                    {
-                        cream = 3;
-                        Console.WriteLine("Maximum allowed cream is 3 packs, sorry!");
-                    }
-                    creamCounter += cream;
-                    order.AddOrder("cream");
-                }
-
-                //make order
+               
                 Console.WriteLine("Would you like another order? Y/N");
                 var anotherOrder = Console.ReadLine();
                 if (!string.IsNullOrEmpty(anotherOrder) && anotherOrder.ToLower() == "n")
                 {
                     //Issue the bill
-                    var orders = order.GetOrders();
-                    Console.WriteLine("Here is summary of your order:");
-                    foreach (var item in orders)
-                    {
-                        Console.WriteLine(item);
-                    }
-
+                   
+                    Console.WriteLine("Here is the summary of your order:");
+                    
+                   
                     Checkout checkout = new Checkout(order);
 
-                    var totalBill = order.GetTotalPrice();
-                    
-                    Console.WriteLine("Your total is: {0:C}",totalBill/100f);
+                    checkout.GenerateOrderSummary();
+
+                   
 
                     //Obtain the money from the customer
                     Console.WriteLine("Please insert your money:");
 
-                    int insertedMoney = 0;
-                    while (insertedMoney < totalBill)
-                    {
-                        var bill = Console.ReadLine();
-                        if (!string.IsNullOrEmpty(bill))
-                        {
-                            double dollar;
-                            double.TryParse(bill, out dollar);
-
-                            var cents = (dollar*100).ToString();
-
-                            if (checkout.ValidBill(cents))
-                            {
-                                insertedMoney += (int)(dollar*100);
-                                checkout.AddMoney(cents);
-                            }
-                            else
-                            {
-                                Console.WriteLine("Please insert valid bills or coins");
-                            }
-                        }
-                    }
+                    checkout.ProcessMoney();
                     
                     Console.WriteLine("Here is your change:");
+
                     var change = checkout.CalculateReturn();
                     Console.WriteLine("{0:C}",change/100f);
 

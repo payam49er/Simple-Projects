@@ -1,14 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VendingMachine
 {
-    internal class AddOn
+    public class Addon : Product
     {
-        public string Name { get; private set; }
-        public int Price { get; private set; }
+        public enum AddOnNames
+        {
+            Sugar,
+            Cream
+        }
+
+        public override sealed string Name { get; set; }
+
+        public override int Price { get; set; }
+
+
+
+        public Addon(AddOnNames name)
+        {
+            this.Name = name.ToString();
+            SetPrice(name);
+        }
+
+        private void SetPrice(AddOnNames name)
+        {
+            switch (name)
+            {
+                case AddOnNames.Sugar:
+                    Price = 25;
+                    break;
+                case AddOnNames.Cream:
+                    Price = 25;
+                    break;
+            }
+        }
     }
 }

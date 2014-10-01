@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace VendingMachine
 {
-    public interface IOrder
+    public abstract class Product
     {
-        void AddOrder(Product product);
-        List<Product> GetOrders();
-        void ClearOrderList();
+        public abstract string Name { get; set; }
+        public abstract int Price { get; set; }
+
     }
 }
